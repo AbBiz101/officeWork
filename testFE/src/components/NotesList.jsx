@@ -1,7 +1,7 @@
+import NoteListCard from './NoteListCard'
 import React, { useEffect, useState } from 'react'
-import SingleNote from '../components/SingleNote'
 
-export default function NotesListPage() {
+export default function NotesList() {
     const [notes, setNotes] = useState([])
 
     useEffect(() => {
@@ -9,16 +9,19 @@ export default function NotesListPage() {
     }, [])
 
     const getNotes = async () => {
-        const req = await fetch('http://127.0.0.1:8000/notes/')
-        const data = await req.json()
-        setNotes(data)
+        const res = await fetch('/notes/')
+        if (res.ok) {
+            const data = await res.json()
+            setNotes(data)
+        }
     }
 
     return (
         <div>
             {notes ?
-                notes.map(note => <SingleNote
-                    key={note.id}
+                notes.map((note, index) => <NoteListCard
+                    key={index}
+                    id={note.id}
                     body={note.body}
                     title={note.title}
                     created={note.created}
