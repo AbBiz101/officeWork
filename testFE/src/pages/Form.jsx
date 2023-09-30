@@ -6,27 +6,43 @@ import { TextField, Button } from "@mui/material";
 
 export default function Form({ varName, varCaseNumber, varDelayedUntil, varAddress, varSignPermitNumber, varPosseURL, varAttached }) {
 
-    const initialValues = {
-        caseNumber: "",
-        address: "",
+    const initialValues = varName === 'SPSD CA Sign' ? {
         posseURL: "",
-        delayedUntil: "",
         attached: "",
         signPermitNumber: "",
         dimensionX: 30.0,
         dimensionY: 24.0,
+    } : varName === 'Demolition Delay' ? {
+        address: "",
+        delayedUntil: "",
+        dimensionX: 30.0,
+        dimensionY: 24.0,
+    } : {
+        caseNumber: "",
+        dimensionX: 30.0,
+        dimensionY: 24.0,
     }
-    const signSchema = yup.object().shape({
-        caseNumber: yup.string().matches(/^av\d{3}-\d{3}$/i, "Case number is not valid").required("required"),
-        dimensionX: yup.number().required("required"),
-        dimensionY: yup.number().required("required"),
-        address: yup.number().required("required"),
-        posseURL: yup.number().required("required"),
-        delayedUntil: yup.number().required("required"),
-        attached: yup.number().required("required"),
-        signPermitNumber: yup.number().required("required"),
 
-    })
+    const signSchema = varName === 'SPSD CA Sign' ?
+        yup.object().shape({
+            dimensionX: yup.number().required("required"),
+            dimensionY: yup.number().required("required"),
+            posseURL: yup.number().required("required"),
+            attached: yup.number().required("required"),
+            signPermitNumber: yup.number().required("required"),
+        })
+        : varName === 'Demolition Delay' ? yup.object().shape({
+            dimensionX: yup.number().required("required"),
+            dimensionY: yup.number().required("required"),
+            address: yup.number().required("required"),
+            delayedUntil: yup.number().required("required"),
+
+        }) : yup.object().shape({
+            caseNumber: yup.string().matches(/^av\d{3}-\d{3}$/i, "Case number is not valid").required("required"),
+            dimensionX: yup.number().required("required"),
+            dimensionY: yup.number().required("required"),
+
+        })
 
     function handleFormSubmit(values) {
         console.log(values, varName);
