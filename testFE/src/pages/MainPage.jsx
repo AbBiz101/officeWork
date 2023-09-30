@@ -1,6 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Form from './Form';
-
+import Accordion from '@mui/material/Accordion';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 export default function MainPage() {
       const signs = [
@@ -70,17 +73,35 @@ export default function MainPage() {
             },
 
       ]
+      const [expanded, setExpanded] = useState(false);
 
+      const handleChange = (j) => (event, isExpanded) => {
+            setExpanded(isExpanded ? j : false)
+      };
       return (
-            <div className="app" style={{ display: 'grid', columnGap:'50px',gridTemplateColumns: 'auto auto auto'  }}>
-                  {signs.map((sign, i) => <Form key={i} varName={sign.varName}
-                        varCaseNumber={sign.varCaseNumber}
-                        varDelayedUntil={sign.varDelayedUntil}
-                        varAddress={sign.varAddress}
-                        varSignPermitNumber={sign.varSignPermitNumber}
-                        varPosseURL={sign.varPosseURL}
-                        varAttached={sign.varAttached} />
+            <div className="app" style={{ display: 'grid', columnGap: '50px', gridTemplateColumns: 'auto auto auto' }}>
+                  {signs && signs.map((sign, i) => <Accordion key={i + 1} expanded={expanded === i + 1} onChange={handleChange(i + 1)}>
+                        <AccordionSummary
+                              expandIcon={<ExpandMoreIcon />}
+                              aria-controls={sign.varName}
+                              id={sign.varName}
+                        >
+                              {sign.varName}
+                        </AccordionSummary>
+                        <AccordionDetails>
+                              <Form varName={sign.varName}
+                                    varCaseNumber={sign.varCaseNumber}
+                                    varDelayedUntil={sign.varDelayedUntil}
+                                    varAddress={sign.varAddress}
+                                    varSignPermitNumber={sign.varSignPermitNumber}
+                                    varPosseURL={sign.varPosseURL}
+                                    varAttached={sign.varAttached} />
+                        </AccordionDetails>
+                  </Accordion>
                   )}
             </div>
       )
 }
+
+
+

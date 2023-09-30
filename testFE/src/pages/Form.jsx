@@ -29,13 +29,12 @@ export default function Form({ varName, varCaseNumber, varDelayedUntil, varAddre
     })
 
     function handleFormSubmit(values) {
-        console.log(values,varName);
+        console.log(values, varName);
     }
-
 
     return (
         <div style={{ display: 'block' }} >
-            <h4>{varName}</h4>
+
             <Formik
                 onSubmit={handleFormSubmit}
                 initialValues={initialValues}
@@ -48,9 +47,6 @@ export default function Form({ varName, varCaseNumber, varDelayedUntil, varAddre
                     handleChange,
                     handleSubmit, resetForm }) => (
                     <form onSubmit={handleSubmit}>
-
-
-
                         {varCaseNumber && <TextField
                             fullWidth
                             variant="filled"
@@ -63,7 +59,6 @@ export default function Form({ varName, varCaseNumber, varDelayedUntil, varAddre
                             error={!!touched.caseNumber && !!errors.caseNumber}
                             helperText={touched.caseNumber && errors.caseNumber}
                         />}
-
                         {varDelayedUntil && <TextField
                             fullWidth
                             variant="filled"
@@ -76,7 +71,6 @@ export default function Form({ varName, varCaseNumber, varDelayedUntil, varAddre
                             error={!!touched.delayedUntil && !!errors.delayedUntil}
                             helperText={touched.delayedUntil && errors.delayedUntil}
                         />}
-
                         {varAddress && <TextField
                             fullWidth
                             variant="filled"
@@ -89,7 +83,6 @@ export default function Form({ varName, varCaseNumber, varDelayedUntil, varAddre
                             error={!!touched.address && !!errors.address}
                             helperText={touched.address && errors.address}
                         />}
-
                         {varSignPermitNumber && <TextField
                             fullWidth
                             variant="filled"
@@ -102,7 +95,6 @@ export default function Form({ varName, varCaseNumber, varDelayedUntil, varAddre
                             error={!!touched.signPermitNumber && !!errors.signPermitNumber}
                             helperText={touched.signPermitNumber && errors.signPermitNumber}
                         />}
-
                         {varPosseURL && <TextField
                             fullWidth
                             variant="filled"
@@ -115,7 +107,6 @@ export default function Form({ varName, varCaseNumber, varDelayedUntil, varAddre
                             error={!!touched.posseURL && !!errors.posseURL}
                             helperText={touched.posseURL && errors.posseURL}
                         />}
-
                         {varAttached && <TextField
                             fullWidth
                             variant="filled"
@@ -128,7 +119,6 @@ export default function Form({ varName, varCaseNumber, varDelayedUntil, varAddre
                             error={!!touched.attached && !!errors.attached}
                             helperText={touched.attached && errors.attached}
                         />}
-
                         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                             <TextField
                                 fullWidth
@@ -155,8 +145,6 @@ export default function Form({ varName, varCaseNumber, varDelayedUntil, varAddre
                                 helperText={touched.dimensionY && errors.dimensionY}
                             />
                         </div>
-
-
                         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
                             <Button type="submit" color="secondary" variant="contained">
                                 Submit
@@ -165,14 +153,10 @@ export default function Form({ varName, varCaseNumber, varDelayedUntil, varAddre
                                 Cancel
                             </Button>
                         </div>
-
-
-
-
-
                     </form>
                 )}
             </Formik>
+
         </div >
     )
 }
