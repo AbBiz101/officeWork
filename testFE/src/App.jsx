@@ -8,7 +8,7 @@ import { Route, Routes } from 'react-router-dom';
 export default function App() {
   return (
     <>
-      <Header />
+     {/*  <Header />   */} 
       <Routes>
         <Route path="/" element={<MainPage />} />
         <Route path="/notes/:id" element={<SingleNote />} />
